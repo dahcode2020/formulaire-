@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f8f7f3" />
+    <meta
+      name="description"
+      content="Maquette de bordereau de transfert de pli : expéditeur, destinataire, confidentialité, transport et export A4."
+    />
+    <title>Bordereau de transfert de pli — Maquette</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+    <div class="demo-banner" role="status">
+      <div class="shell demo-banner__inner">
+        <span class="demo-banner__dot" aria-hidden="true"></span>
+        <p><strong>Maquette de démonstration.</strong> Les informations restent dans votre navigateur ; aucune demande n’est transmise à une mission ou à un transporteur.</p>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="#top" aria-label="Bordereau de transfert, accueil">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 36 36" fill="none">
+              <path d="m18 4 12 6.7v14.6L18 32l-12-6.7V10.7L18 4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+              <path d="m6.6 10.9 11.4 6.4 11.4-6.4M18 17.3V31M12.1 7.3l11.7 6.5v6.8" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <span class="brand__text">
+            <span class="brand__name">BORDEREAU</span>
+            <span class="brand__descriptor">ESPACE TRANSFERT</span>
+          </span>
+        </a>
+
+        <nav class="main-nav" aria-label="Navigation principale">
+          <a href="#comment-ca-marche">Comment ça marche</a>
+          <a href="#confidentialite">Confidentialité</a>
+        </nav>
+
+        <a class="header-cta" href="#formulaire">
+          Commencer
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero shell" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow__line"></span> BORDEREAU DE TRANSFERT · MAQUETTE</p>
+          <h1 id="hero-title">Un pli, un parcours <em>bien cadré.</em></h1>
+          <p class="hero-lede">Préparez un bordereau en six étapes : missions, contenu général, confidentialité, transport et signature. Choisissez aussi ce qui apparaîtra dans l’export A4.</p>
+          <a class="button button--primary hero-button" href="#formulaire">
+            Créer un bordereau
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </a>
+          <div class="hero-note">
+            <span class="hero-note__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5 19 6v5.6c0 4.3-2.8 7.2-7 8.9-4.2-1.7-7-4.6-7-8.9V6l7-2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span><strong>Prototype sans transmission.</strong><br />N’y saisissez aucun code secret ni contenu classifié.</span>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-label="Illustration d'un colis prêt à être remis" role="img">
+          <div class="hero-art__grain" aria-hidden="true"></div>
+          <div class="hero-art__topline"><span>BORDEREAU DE TRANSFERT</span><span class="art-status"><i></i> APERÇU A4</span></div>
+          <div class="hero-art__orbit hero-art__orbit--one" aria-hidden="true"></div>
+          <div class="hero-art__orbit hero-art__orbit--two" aria-hidden="true"></div>
+          <svg class="parcel-illustration" viewBox="0 0 390 330" fill="none" aria-hidden="true">
+            <ellipse cx="197" cy="282" rx="112" ry="18" fill="#162F2A" opacity=".16" />
+            <path d="m91 114 102-55 111 55-103 61L91 114Z" fill="#F2E6D2" stroke="#FFFCF4" stroke-width="2" stroke-linejoin="round" />
+            <path d="m91 114 110 61v105L91 218V114Z" fill="#CDAE82" stroke="#FFFCF4" stroke-width="2" stroke-linejoin="round" />
+            <path d="m201 175 103-61v104l-103 62V175Z" fill="#A98760" stroke="#FFFCF4" stroke-width="2" stroke-linejoin="round" />
+            <path d="m154 80 108 57-61 38-110-61 63-34Z" fill="#DDC9AA" stroke="#FFFCF4" stroke-width="2" stroke-linejoin="round" />
+            <path d="m182 65 30-16 108 59-30 17-108-60Z" fill="#B7976D" stroke="#FFFCF4" stroke-width="2" stroke-linejoin="round" />
+            <path d="m192 121 20-11 32 18-20 12-32-19Z" fill="#F8F3E8" opacity=".9" />
+            <path d="M221 152v34m0 0 13-8m-13 8-13-7" stroke="#F8F3E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".85" />
+            <path d="M119 204v-38l20 11v39l-20-12Z" fill="#E5D5BC" opacity=".6" />
+            <path d="m252 205 29-17v29l-29 18v-30Z" fill="#E5D5BC" opacity=".4" />
+            <path d="m138 248 20 11m-20-2 20 11" stroke="#F3EBDD" stroke-width="2" stroke-linecap="round" opacity=".5" />
+            <circle cx="301" cy="76" r="3" fill="#C7D6B7" />
+            <circle cx="83" cy="196" r="4" fill="#E9C988" />
+            <path d="M307 86v20m-10-10h20" stroke="#C7D6B7" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+          <div class="art-card">
+            <span class="art-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="m4.5 7.8 7.5 4.3 7.5-4.3M12 12.1V21" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            </span>
+            <span><strong>Votre récapitulatif</strong><small>Prêt à télécharger en PDF</small></span>
+            <span class="art-card__check" aria-hidden="true">✓</span>
+          </div>
+          <span class="art-caption">UN PARCOURS EN 6 ÉTAPES</span>
+        </div>
+      </section>
+
+      <section class="benefits shell" id="comment-ca-marche" aria-label="Les atouts du bordereau">
+        <div class="benefit">
+          <span class="benefit__number">01</span>
+          <span><strong>Six étapes structurées</strong><small>De la mission émettrice à la validation.</small></span>
+        </div>
+        <div class="benefit">
+          <span class="benefit__number">02</span>
+          <span><strong>Masquage maîtrisé</strong><small>Choisissez les rubriques absentes du PDF.</small></span>
+        </div>
+        <div class="benefit">
+          <span class="benefit__number">03</span>
+          <span><strong>Export A4 imprimable</strong><small>Signature dessinée ou zone papier.</small></span>
+        </div>
+      </section>
+
+      <section class="form-section" id="formulaire" aria-labelledby="form-section-title">
+        <div class="shell">
+          <div class="section-heading">
+            <p class="eyebrow"><span class="eyebrow__line"></span> VOTRE DEMANDE</p>
+            <h2 id="form-section-title">Préparons le bordereau.</h2>
+            <p>Les champs marqués d’un astérisque sont requis. Cette maquette n’est pas un canal officiel : n’y saisissez ni contenu classifié ni secret d’accès.</p>
+          </div>
+
+          <div class="form-card">
+            <aside class="wizard-aside" aria-label="Étapes du bordereau">
+              <div class="wizard-aside__intro">
+                <span class="aside-kicker">VOTRE PARCOURS</span>
+                <p>Un bordereau clair, du départ à la signature.</p>
+              </div>
+              <ol class="step-list" id="step-list">
+                <li class="step-list__item is-active" data-step-item="0" aria-current="step"><span class="step-list__number">01</span><span class="step-list__text"><strong>Expéditeur</strong><small>Mission émettrice</small></span><span class="step-list__tick" aria-hidden="true">✓</span></li>
+                <li class="step-list__item" data-step-item="1"><span class="step-list__number">02</span><span class="step-list__text"><strong>Destinataire</strong><small>Mission de destination</small></span><span class="step-list__tick" aria-hidden="true">✓</span></li>
+                <li class="step-list__item" data-step-item="2"><span class="step-list__number">03</span><span class="step-list__text"><strong>Contenu</strong><small>Nature et quantité</small></span><span class="step-list__tick" aria-hidden="true">✓</span></li>
+                <li class="step-list__item" data-step-item="3"><span class="step-list__number">04</span><span class="step-list__text"><strong>Confidentialité</strong><small>Accès et masquage</small></span><span class="step-list__tick" aria-hidden="true">✓</span></li>
+                <li class="step-list__item" data-step-item="4"><span class="step-list__number">05</span><span class="step-list__text"><strong>Transport</strong><small>Mode et enlèvement</small></span><span class="step-list__tick" aria-hidden="true">✓</span></li>
+                <li class="step-list__item" data-step-item="5"><span class="step-list__number">06</span><span class="step-list__text"><strong>Récapitulatif</strong><small>Signature et export A4</small></span><span class="step-list__tick" aria-hidden="true">✓</span></li>
+              </ol>
+              <div class="privacy-note">
+                <span class="privacy-note__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 10V7a4 4 0 1 1 8 0v3m-4 5v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </span>
+                <p><strong>Maquette locale.</strong><br />N’y saisissez aucun contenu classifié, mot de passe ou code d’accès.</p>
+              </div>
+            </aside>
+
+            <div class="wizard-content">
+              <div class="wizard-content__top">
+                <span class="wizard-content__label">BORDEREAU DE TRANSFERT · DÉMONSTRATION</span>
+                <span class="step-counter" id="step-counter">ÉTAPE 01 <span>/ 06</span></span>
+              </div>
+              <div class="progress-track" role="progressbar" aria-label="Progression du formulaire" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-valuetext="Étape 1 sur 6" id="progress-bar">
+                <span class="progress-track__fill" id="progress-fill"></span>
+              </div>
+
+              <form id="delivery-form" novalidate>
+                <section class="step-panel" data-step="0" aria-labelledby="step-title-0">
+                  <div class="step-panel__heading">
+                    <span class="step-panel__eyebrow">ÉTAPE 01 · 06</span>
+                    <h3 id="step-title-0" tabindex="-1">Qui expédie le pli ?</h3>
+                    <p>Renseignez la mission émettrice, son service et le référent responsable du bordereau.</p>
+                  </div>
+                  <div class="field-grid">
+                    <div class="field field--wide">
+                      <label for="sender-mission">Mission émettrice <span class="required-mark" aria-hidden="true">*</span></label>
+                      <input id="sender-mission" name="senderMission" type="text" autocomplete="organization" maxlength="140" placeholder="Nom de la mission" aria-required="true" aria-describedby="sender-mission-error" />
+                      <span class="field-error" id="sender-mission-error" hidden></span>
+                    </div>
+                    <div class="field field--wide">
+                      <label for="sender-service">Service émetteur <span class="required-mark" aria-hidden="true">*</span></label>
+                      <input id="sender-service" name="senderService" type="text" maxlength="120" placeholder="Ex. chancellerie, service administratif" aria-required="true" aria-describedby="sender-service-error" />
+                      <span class="field-error" id="sender-service-error" hidden></span>
+                    </div>
+                    <div class="field">
+                      <label for="sender-name">Référent responsable <span class="required-mark" aria-hidden="true">*</span></label>
+                      <input id="sender-name" name="senderName" type="text" autocomplete="name" maxlength="120" placeholder="Nom et prénom" aria-required="true" aria-describedby="sender-name-error" />
+                      <span class="field-error" id="sender-name-error" hidden></span>
+                    </div>
+                    <div class="field">
+                      <label for="sender-role">Fonction <span class="required-mark" aria-hidden="true">*</span></label>
+                      <input id="sender-role" name="senderRole" type="text" maxlength="100" placeholder="Fonction du référent" aria-required="true" aria-describedby="sender-role-error" />
+                      <span class="field-error" id="sender-role-error" hidden></span>
+                    </div>
+                    <div class="field">
+                      <label for="sender-phone">Téléphone <span class="optional-tag">SI PAS DE COURRIEL</span></label>
+                      <input id="sender-phone" name="senderPhone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" placeholder="Ex. +229 01 23 45 67" aria-describedby="sender-contact-hint sender-phone-error" />
+                      <span class="field-error" id="sender-phone-error" hidden></span>
+                    </div>
+                    <div class="field">
+                      <label for="sender-email">Courriel professionnel <span class="optional-tag">SI PAS DE TÉLÉPHONE</span></label>
+                      <input id="sender-email" name="senderEmail" type="email" autocomplete="email" maxlength="160" placeholder="nom@mission.example" aria-describedby="sender-contact-hint sender-email-error" />
+                      <span class="field-error" id="sender-email-error" hidden></span>
+                    </div>
+                  </div>
+                  <p class="group-hint" id="sender-contact-hint">Un moyen de contact professionnel est requis : téléphone ou courriel.</p>
+                  <span class="field-error" id="sender-contact-error" role="alert" hidden></span>
+                  <div class="step-actions">
+                    <span class="action-reassurance"><span aria-hidden="true">↳</span> Les coordonnées pourront être masquées dans le PDF.</span>
+                    <button class="button button--primary" type="button" data-next>Continuer <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+                  </div>
+                </section>
+
+                <section class="step-panel" data-step="1" aria-labelledby="step-title-1" hidden>
+                  <div class="step-panel__heading">
+                    <span class="step-panel__eyebrow">ÉTAPE 02 · 06</span>
+                    <h3 id="step-title-1" tabindex="-1">À quelle mission est-il destiné ?</h3>
+                    <p>Indiquez la mission de destination et son contact autorisé. La confirmation d’autorisation est requise pour continuer.</p>
+                  </div>
+                  <div class="field-grid">
+                    <div class="field field--wide">
+                      <label for="recipient-mission">Mission de destination <span class="required-mark" aria-hidden="true">*</span></label>
+                      <input id="recipient-mission" name="recipientMission" type="text" maxlength="140" placeholder="Nom de la mission destinataire" aria-required="true" aria-describedby="recipient-mission-error" />
+                      <span class="field-error" id="recipient-mission-error" hidden></span>
+                    </div>
+                    <div class="field field--wide">
+                      <label for="recipient-service">Service destinataire <span class="optional-tag">FACULTATIF</span></label>
+                      <input id="recipient-service" name="recipientService" type="text" maxlength="120" placeholder="Service concerné, le cas échéant" />
+                    </div>
+                    <div class="field">
+                      <label for="recipient-name">Contact autorisé <span class="required-mark" aria-hidden="true">*</span></label>
+                      <input id="recipient-name" name="recipientName" type="text" maxlength="120" placeholder="Nom et prénom" aria-required="true" aria-describedby="recipient-name-error" />
+                      <span class="field-error" id="recipient-name-error" hidden></span>
+                    </div>
+                    <div class="field">
+                      <label for="recipient-role">Fonction <span class="required-mark" aria-hidden="true">*</span></label>
+                      <input id="recipient-role" name="recipientRole" type="text" maxlength="100" placeholder="Fonction du contact" aria-required="true" aria-describedby="recipient-role-error" />
+                      <span class="field-error" id="recipient-role-error" hidden></span>
+                    </div>
+                    <div class="field">
+                      <label for="recipient-phone">Téléphone <span class="optional-tag">SI PAS DE COURRIEL</span></label>
+                      <input id="recipient-phone" name="recipientPhone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" placeholder="Ex. +229 01 23 45 67" aria-describedby="recipient-contact-hint recipient-phone-error" />
+                      <span class="field-error" id="recipient-phone-error" hidden></span>
+                    </div>
+                    <div class="field">
+                      <label for="recipient-email">Courriel professionnel <span class="optional-tag">SI PAS DE TÉLÉPHONE</span></label>
+                      <input id="recipient-email" name="recipientEmail" type="email" autocomplete="email" maxlength="160" placeholder="nom@mission.example" aria-describedby="recipient-contact-hint recipient-email-error" />
+                      <span class="field-error" id="recipient-email-error" hidden></span>
+                    </div>
+                  </div>
+                  <p class="group-hint" id="recipient-contact-hint">Renseignez un moyen de contact professionnel.</p>
+                  <span class="field-error" id="recipient-contact-error" role="alert" hidden></span>
+                  <div class="confirmation-box confirmation-box--compact">
+                    <label class="checkbox-label" for="recipient-authorized">
+                      <input id="recipient-authorized" name="recipientAuthorized" type="checkbox" aria-required="true" aria-describedby="recipient-authorized-error" />
+                      <span class="custom-checkbox" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="m3.5 8.2 2.8 2.7 6.2-6.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                      <span>Je confirme que ce contact est autorisé à réceptionner le pli.<span class="required-mark" aria-hidden="true"> *</span></span>
+                    </label>
+                    <span class="field-error" id="recipient-authorized-error" hidden></span>
+                  </div>
+                  <div class="step-actions">
+                    <button class="button button--back" type="button" data-back><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H5m4 4-4-4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>Retour</button>
+                    <button class="button button--primary" type="button" data-next>Continuer <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+                  </div>
+                </section>
+
+                <section class="step-panel" data-step="2" aria-labelledby="step-title-2" hidden>
+                  <div class="step-panel__heading">
+                    <span class="step-panel__eyebrow">ÉTAPE 03 · 06</span>
+                    <h3 id="step-title-2" tabindex="-1">Que contient le pli ?</h3>
+                    <p>Décrivez uniquement la catégorie générale, le nombre de pièces et le poids estimé. N’indiquez pas de contenu classifié ou détaillé.</p>
+                  </div>
+                  <div class="field-grid">
+                    <div class="field field--wide">
+                      <label for="content-nature">Nature générale du pli <span class="required-mark" aria-hidden="true">*</span></label>
+                      <select id="content-nature" name="contentNature" aria-required="true" aria-describedby="content-nature-error">
+                        <option value="">Choisir une catégorie</option>
+                        <option value="Documents administratifs">Documents administratifs</option>
+                        <option value="Correspondance">Correspondance</option>
+                        <option value="Dossier documentaire">Dossier documentaire</option>
+                        <option value="Matériel autorisé">Matériel autorisé</option>
+                        <option value="Autre catégorie autorisée">Autre catégorie autorisée</option>
+                      </select>
+                      <span class="field-error" id="content-nature-error" hidden></span>
+                    </div>
+                    <div class="field">
+                      <label for="piece-count">Nombre de pièces <span class="required-mark" aria-hidden="true">*</span></label>
+                      <input id="piece-count" name="pieceCount" type="number" inputmode="numeric" min="1" max="999" step="1" placeholder="Ex. 3" aria-required="true" aria-describedby="piece-count-error" />
+                      <span class="field-error" id="piece-count-error" hidden></span>
+                    </div>
+                    <div class="field">
+                      <label for="estimated-weight">Poids estimé (kg) <span class="optional-tag">FACULTATIF</span></label>
+                      <input id="estimated-weight" name="estimatedWeight" type="number" inputmode="decimal" min="0.01" max="50000" step="0.01" placeholder="Ex. 1,5" aria-describedby="estimated-weight-error" />
+                      <span class="field-error" id="estimated-weight-error" hidden></span>
+                    </div>
+                    <div class="field field--wide">
+                      <label for="content-note">Précision non sensible <span class="optional-tag">FACULTATIF</span></label>
+                      <textarea id="content-note" name="contentNote" rows="3" maxlength="180" placeholder="Au besoin, une indication logistique générale uniquement." aria-describedby="content-note-hint"></textarea>
+                      <small class="field-hint" id="content-note-hint">Aucun détail confidentiel, identifiant, code ou description du contenu sensible.</small>
+                    </div>
+                  </div>
+                  <div class="step-actions">
+                    <button class="button button--back" type="button" data-back><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H5m4 4-4-4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>Retour</button>
+                    <button class="button button--primary" type="button" data-next>Continuer <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+                  </div>
+                </section>
+
+                <section class="step-panel" data-step="3" aria-labelledby="step-title-3" hidden>
+                  <div class="step-panel__heading">
+                    <span class="step-panel__eyebrow">ÉTAPE 04 · 06</span>
+                    <h3 id="step-title-3" tabindex="-1">Qui peut voir ces informations ?</h3>
+                    <p>Choisissez un repère de diffusion non secret et décidez quelles rubriques seront masquées dans le PDF.</p>
+                  </div>
+                  <div class="field-grid">
+                    <div class="field">
+                      <label for="access-level">Niveau d’accès <span class="required-mark" aria-hidden="true">*</span></label>
+                      <select id="access-level" name="accessLevel" aria-required="true" aria-describedby="access-level-hint access-level-error">
+                        <option value="">Choisir un niveau</option>
+                        <option value="Diffusion interne">Diffusion interne</option>
+                        <option value="Diffusion restreinte">Diffusion restreinte</option>
+                        <option value="Diffusion limitée aux référents">Diffusion limitée aux référents</option>
+                      </select>
+                      <span class="field-error" id="access-level-error" hidden></span>
+                    </div>
+                    <div class="field">
+                      <label for="classification-code">Code de classification non secret <span class="optional-tag">FACULTATIF</span></label>
+                      <input id="classification-code" name="classificationCode" type="text" maxlength="40" placeholder="Ex. INT-02" aria-describedby="classification-code-hint" />
+                    </div>
+                    <div class="field-hint field--wide" id="access-level-hint">Ces choix sont des repères de maquette, pas une classification officielle.</div>
+                    <div class="field-hint field--wide" id="classification-code-hint">Saisissez uniquement une étiquette non secrète. Jamais de mot de passe, PIN, code de coffre ou identifiant d’accès.</div>
+                  </div>
+                  <div class="masking-section">
+                    <div class="masking-section__heading"><strong>Masquage dans le PDF</strong><span>Facultatif</span></div>
+                    <p>Le récapitulatif de l’écran reste complet. Les rubriques choisies ci-dessous seront remplacées par « Masqué » dans le PDF.</p>
+                    <div class="mask-grid">
+                      <label class="mask-option"><input id="mask-missions" type="checkbox" /><span>Masquer les missions et services</span></label>
+                      <label class="mask-option"><input id="mask-contacts" type="checkbox" /><span>Masquer les référents et leurs coordonnées</span></label>
+                      <label class="mask-option"><input id="mask-content" type="checkbox" /><span>Masquer la nature, le nombre et le poids</span></label>
+                      <label class="mask-option"><input id="mask-transport" type="checkbox" /><span>Masquer le mode et le créneau d’enlèvement</span></label>
+                      <label class="mask-option"><input id="mask-code" type="checkbox" /><span>Masquer le code de classification</span></label>
+                    </div>
+                  </div>
+                  <div class="step-actions">
+                    <button class="button button--back" type="button" data-back><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H5m4 4-4-4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>Retour</button>
+                    <button class="button button--primary" type="button" data-next>Continuer <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+                  </div>
+                </section>
+
+                <section class="step-panel" data-step="4" aria-labelledby="step-title-4" hidden>
+                  <div class="step-panel__heading">
+                    <span class="step-panel__eyebrow">ÉTAPE 05 · 06</span>
+                    <h3 id="step-title-4" tabindex="-1">Comment le pli sera-t-il acheminé ?</h3>
+                    <p>Précisez le mode prévu et un créneau d’enlèvement général, sans indiquer de procédure ou code de sécurité.</p>
+                  </div>
+                  <div class="field-grid">
+                    <div class="field field--wide">
+                      <label for="transport-mode">Mode d’acheminement <span class="required-mark" aria-hidden="true">*</span></label>
+                      <select id="transport-mode" name="transportMode" aria-required="true" aria-describedby="transport-mode-error">
+                        <option value="">Choisir un mode</option>
+                        <option value="Liaison interne autorisée">Liaison interne autorisée</option>
+                        <option value="Transporteur mandaté">Transporteur mandaté</option>
+                        <option value="Remise directe au contact autorisé">Remise directe au contact autorisé</option>
+                        <option value="Autre mode autorisé">Autre mode autorisé</option>
+                      </select>
+                      <span class="field-error" id="transport-mode-error" hidden></span>
+                    </div>
+                    <div class="field">
+                      <label for="pickup-date">Date d’enlèvement prévue <span class="optional-tag">FACULTATIF</span></label>
+                      <input id="pickup-date" name="pickupDate" type="date" aria-describedby="pickup-date-error" />
+                      <span class="field-error" id="pickup-date-error" hidden></span>
+                    </div>
+                    <div class="field">
+                      <label for="pickup-window">Créneau d’enlèvement <span class="required-mark" aria-hidden="true">*</span></label>
+                      <select id="pickup-window" name="pickupWindow" aria-required="true" aria-describedby="pickup-window-error">
+                        <option value="">Choisir un créneau</option>
+                        <option value="Matin (08 h – 12 h)">Matin (08 h – 12 h)</option>
+                        <option value="Après-midi (13 h – 17 h)">Après-midi (13 h – 17 h)</option>
+                        <option value="À convenir avec le référent">À convenir avec le référent</option>
+                      </select>
+                      <span class="field-error" id="pickup-window-error" hidden></span>
+                    </div>
+                    <div class="field field--wide">
+                      <label for="transport-note">Note logistique non sensible <span class="optional-tag">FACULTATIF</span></label>
+                      <textarea id="transport-note" name="transportNote" rows="3" maxlength="180" placeholder="Indication logistique générale, si nécessaire." aria-describedby="transport-note-hint"></textarea>
+                      <small class="field-hint" id="transport-note-hint">N’indiquez pas d’adresse sécurisée, d’itinéraire détaillé ou de consigne de sécurité.</small>
+                    </div>
+                  </div>
+                  <div class="step-actions">
+                    <button class="button button--back" type="button" data-back><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H5m4 4-4-4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>Retour</button>
+                    <button class="button button--primary" type="button" data-next>Vérifier le bordereau <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+                  </div>
+                </section>
+
+                <section class="step-panel" data-step="5" aria-labelledby="step-title-5" hidden>
+                  <div class="step-panel__heading">
+                    <span class="step-panel__eyebrow">ÉTAPE 06 · 06</span>
+                    <h3 id="step-title-5" tabindex="-1">Vérifiez, signez, exportez.</h3>
+                    <p>Relisez les informations et les règles de masquage. Le PDF sera généré au format A4.</p>
+                  </div>
+                  <div class="review-list" aria-label="Aperçu du bordereau">
+                    <section class="review-block" aria-labelledby="review-sender-title">
+                      <div class="review-block__header"><h4 id="review-sender-title"><span>01</span> Expéditeur</h4><button type="button" class="edit-link" data-edit-step="0">Modifier</button></div>
+                      <dl class="review-grid">
+                        <div><dt>Mission</dt><dd id="review-sender-mission">—</dd></div>
+                        <div><dt>Service</dt><dd id="review-sender-service">—</dd></div>
+                        <div><dt>Référent</dt><dd id="review-sender-person">—</dd></div>
+                        <div><dt>Coordonnées</dt><dd id="review-sender-contact">—</dd></div>
+                      </dl>
+                    </section>
+                    <section class="review-block" aria-labelledby="review-recipient-title">
+                      <div class="review-block__header"><h4 id="review-recipient-title"><span>02</span> Destinataire</h4><button type="button" class="edit-link" data-edit-step="1">Modifier</button></div>
+                      <dl class="review-grid">
+                        <div><dt>Mission</dt><dd id="review-recipient-mission">—</dd></div>
+                        <div><dt>Service</dt><dd id="review-recipient-service">—</dd></div>
+                        <div><dt>Contact autorisé</dt><dd id="review-recipient-person">—</dd></div>
+                        <div><dt>Coordonnées</dt><dd id="review-recipient-contact">—</dd></div>
+                        <div class="review-grid__wide"><dt>Autorisation</dt><dd id="review-authorized">À confirmer</dd></div>
+                      </dl>
+                    </section>
+                    <section class="review-block" aria-labelledby="review-content-title">
+                      <div class="review-block__header"><h4 id="review-content-title"><span>03</span> Contenu</h4><button type="button" class="edit-link" data-edit-step="2">Modifier</button></div>
+                      <dl class="review-grid">
+                        <div><dt>Nature générale</dt><dd id="review-content-nature">—</dd></div>
+                        <div><dt>Nombre de pièces</dt><dd id="review-piece-count">—</dd></div>
+                        <div><dt>Poids estimé</dt><dd id="review-weight">—</dd></div>
+                        <div class="review-grid__wide"><dt>Précision</dt><dd id="review-content-note">—</dd></div>
+                      </dl>
+                    </section>
+                    <section class="review-block" aria-labelledby="review-privacy-title">
+                      <div class="review-block__header"><h4 id="review-privacy-title"><span>04</span> Confidentialité</h4><button type="button" class="edit-link" data-edit-step="3">Modifier</button></div>
+                      <dl class="review-grid">
+                        <div><dt>Niveau d’accès</dt><dd id="review-access-level">—</dd></div>
+                        <div><dt>Code non secret</dt><dd id="review-classification-code">—</dd></div>
+                        <div class="review-grid__wide"><dt>Masquage PDF</dt><dd id="review-mask-summary">—</dd></div>
+                      </dl>
+                    </section>
+                    <section class="review-block" aria-labelledby="review-transport-title">
+                      <div class="review-block__header"><h4 id="review-transport-title"><span>05</span> Transport</h4><button type="button" class="edit-link" data-edit-step="4">Modifier</button></div>
+                      <dl class="review-grid">
+                        <div><dt>Mode</dt><dd id="review-transport-mode">—</dd></div>
+                        <div><dt>Date</dt><dd id="review-pickup-date">—</dd></div>
+                        <div><dt>Créneau</dt><dd id="review-pickup-window">—</dd></div>
+                        <div class="review-grid__wide"><dt>Note logistique</dt><dd id="review-transport-note">—</dd></div>
+                      </dl>
+                    </section>
+                  </div>
+
+                  <div class="signoff-card">
+                    <div class="signoff-card__heading"><span class="step-panel__eyebrow">VALIDATION DU BORDEREAU</span><strong>Qui valide ce bordereau ?</strong></div>
+                    <div class="field-grid">
+                      <div class="field">
+                        <label for="signatory-name">Nom du signataire <span class="required-mark" aria-hidden="true">*</span></label>
+                        <input id="signatory-name" name="signatoryName" type="text" autocomplete="name" maxlength="120" placeholder="Nom et prénom" aria-required="true" aria-describedby="signatory-name-error" />
+                        <span class="field-error" id="signatory-name-error" hidden></span>
+                      </div>
+                      <div class="field">
+                        <label for="signatory-role">Fonction <span class="required-mark" aria-hidden="true">*</span></label>
+                        <input id="signatory-role" name="signatoryRole" type="text" maxlength="100" placeholder="Fonction du signataire" aria-required="true" aria-describedby="signatory-role-error" />
+                        <span class="field-error" id="signatory-role-error" hidden></span>
+                      </div>
+                    </div>
+                    <fieldset class="signature-choice">
+                      <legend>Signature <span class="required-mark" aria-hidden="true">*</span></legend>
+                      <label><input type="radio" name="signature-mode" value="draw" /> Dessiner une signature dans le cadre</label>
+                      <label><input type="radio" name="signature-mode" value="print" checked /> Signer à la main après impression du PDF</label>
+                    </fieldset>
+                    <div class="signature-pad-wrap" id="signature-pad-wrap" hidden>
+                      <div class="signature-pad__top"><span>Signature manuscrite</span><button type="button" class="edit-link" id="clear-signature">Effacer</button></div>
+                      <canvas id="signature-pad" width="720" height="180" tabindex="0" aria-label="Cadre de signature. Dessinez avec la souris, le doigt ou un stylet."></canvas>
+                      <span class="field-hint">Cette maquette ne réalise pas de signature électronique certifiée.</span>
+                    </div>
+                    <span class="field-error" id="signature-error" role="alert" hidden></span>
+                    <div class="confirmation-box confirmation-box--compact">
+                      <label class="checkbox-label" for="attest-authority">
+                        <input id="attest-authority" name="attestAuthority" type="checkbox" aria-required="true" aria-describedby="attest-authority-error" />
+                        <span class="custom-checkbox" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="m3.5 8.2 2.8 2.7 6.2-6.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                        <span>Je confirme être autorisé à valider les informations de ce bordereau.<span class="required-mark" aria-hidden="true"> *</span></span>
+                      </label>
+                      <span class="field-error" id="attest-authority-error" hidden></span>
+                    </div>
+                    <p class="signoff-note">En mode « après impression », une zone de signature manuscrite est réservée dans le PDF A4.</p>
+                  </div>
+                  <div class="demo-document-note">
+                    <span class="demo-document-note__mark" aria-hidden="true">i</span>
+                    <p>Maquette de démonstration : le bordereau n’est transmis à aucune mission ni aucun transporteur. Il ne constitue pas un document officiel. N’y inscrivez aucun secret ou contenu classifié.</p>
+                  </div>
+                  <div class="download-status" id="download-status" role="status" aria-live="polite"></div>
+                  <div class="step-actions">
+                    <button class="button button--back" type="button" data-back><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H5m4 4-4-4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>Retour</button>
+                    <button class="button button--primary" type="button" id="download-pdf">Exporter en PDF A4 <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v9m0 0 3.5-3.5M10 12 6.5 8.5M4 15.5v2h12v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+                  </div>
+                </section>
+              </form>
+            </div>
+          </div>
+          <p class="form-footnote"><span aria-hidden="true">✳</span> Cette maquette ne remplace pas les procédures officielles de votre organisation ou transporteur.</p>
+          <section class="privacy-details" id="confidentialite" aria-labelledby="privacy-details-title">
+            <span class="privacy-details__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 10V7a4 4 0 1 1 8 0v3m-4 5v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </span>
+            <div><h3 id="privacy-details-title">À propos de vos données</h3><p>Cette maquette n’a pas de serveur : les réponses restent en mémoire dans cette page et disparaissent lorsque vous la quittez ou l’actualisez. Le PDF est généré dans votre navigateur, sans envoi automatique.</p></div>
+            <span class="privacy-details__label">TRAITEMENT LOCAL</span>
+          </section>
+        </div>
+      </section>
+
+      <section class="closing shell" aria-label="Informations complémentaires">
+        <div class="closing__icon" aria-hidden="true">
+          <svg viewBox="0 0 28 28" fill="none"><path d="M5 8.5 14 3l9 5.5v11L14 25l-9-5.5v-11Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="m5.5 8.8 8.5 5.1 8.5-5.1M14 14v10.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div><p class="eyebrow">UN PARCOURS PLUS SEREIN</p><h2>Vos informations, votre rythme.</h2></div>
+        <a href="#formulaire" class="text-link">Reprendre le formulaire <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <p><span class="footer-mark" aria-hidden="true">B</span> <strong>BORDEREAU</strong> <span class="footer-separator">·</span> Maquette de démonstration</p>
+        <a href="#confidentialite">À propos de vos données</a>
+        <span>© <span id="current-year">2026</span> Espace transfert</span>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
