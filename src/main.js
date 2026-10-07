@@ -453,7 +453,7 @@ function makePdf() {
   doc.text(t("BORDEREAU DE TRANSFERT"), margin, 15);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(150, 91, 65);
-  doc.text(t("MAQUETTE - NON OFFICIEL"), pageWidth - margin, 15, { align: "right" });
+  doc.text(t("MAQUETTE - NON OFFICIEL (À légaliser avant transmission au diplomate)"), pageWidth - margin, 15, { align: "right" });
   doc.setFont("helvetica", "normal");
   doc.setFontSize(20);
   doc.setTextColor(...ink);
@@ -568,7 +568,7 @@ function makePdf() {
   }
   y += 34;
 
-  const notice = t("MAQUETTE DE DEMONSTRATION - Document genere sur cet appareil, sans transmission. N'est pas un bordereau officiel, une habilitation ou une signature electronique certifiee. Les niveaux et codes de classification saisis ici ne sont que des reperes de maquette. Ne pas utiliser pour des informations classifiees ou des secrets.");
+  const notice = t("DOCUMENT À LÉGALISER — Document généré sur cet appareil, sans transmission. Ce document ne constitue ni un bordereau officiel, ni une habilitation, ni une signature électronique certifiée. La légalisation, ses effets et les conditions de transmission doivent être confirmés auprès de l’autorité compétente avant tout envoi au diplomate. Les niveaux et codes de classification saisis ici ne sont que des repères de maquette. Ne pas utiliser pour des informations classifiées ou des secrets.");
   const noticeLines = doc.splitTextToSize(cleanPdfText(notice), contentWidth - 10);
   const noticeHeight = noticeLines.length * 4 + 9;
   ensureSpace(noticeHeight + 2);
