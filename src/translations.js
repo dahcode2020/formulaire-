@@ -2,7 +2,7 @@ const entries = [
   ["Bordereau de transfert de pli — Maquette", "Transfer slip — Prototype", "Transferformular für Sendungen — Prototyp"],
   ["Maquette de bordereau de transfert de pli : expéditeur, destinataire, confidentialité, transport et export A4.", "Prototype transfer form: sender, recipient, confidentiality, transport and A4 export.", "Prototyp eines Transferformulars: Absender, Empfänger, Vertraulichkeit, Transport und A4-Export."],
   ["Aller au contenu principal", "Skip to main content", "Zum Hauptinhalt springen"],
-  ["Maquette de démonstration.", "Demonstration prototype.", "Demonstrations-Prototyp."],
+  ["Formulaire d’enregistrement de livraison diplomatique confidentiel.", "Confidential diplomatic delivery registration form.", "Vertrauliches Formular zur Erfassung diplomatischer Lieferungen."],
   ["Les informations restent dans votre navigateur ; aucune demande n’est transmise à une mission ou à un transporteur.", "Information stays in your browser; no request is sent to a mission or carrier.", "Die Angaben bleiben in Ihrem Browser; es wird keine Anfrage an eine Vertretung oder einen Transportdienst übermittelt."],
   ["BORDEREAU", "TRANSFER", "TRANSFER"],
   ["ESPACE TRANSFERT", "TRANSFER PORTAL", "TRANSFERPORTAL"],
