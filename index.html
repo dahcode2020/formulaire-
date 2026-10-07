@@ -40,6 +40,12 @@
           <a href="#confidentialite">Confidentialité</a>
         </nav>
 
+        <div class="language-switch" role="group" aria-label="Langue">
+          <button type="button" data-language="fr" aria-pressed="true" aria-label="Afficher en français">FR</button>
+          <button type="button" data-language="de" aria-pressed="false" aria-label="Afficher en allemand">DE</button>
+          <button type="button" data-language="en" aria-pressed="false" aria-label="Afficher en anglais">EN</button>
+        </div>
+
         <a class="header-cta" href="#formulaire">
           Commencer
           <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
@@ -262,11 +268,11 @@
                       <label for="content-nature">Nature générale du pli <span class="required-mark" aria-hidden="true">*</span></label>
                       <select id="content-nature" name="contentNature" aria-required="true" aria-describedby="content-nature-error">
                         <option value="">Choisir une catégorie</option>
-                        <option value="Documents administratifs">Documents administratifs</option>
-                        <option value="Correspondance">Correspondance</option>
-                        <option value="Dossier documentaire">Dossier documentaire</option>
-                        <option value="Matériel autorisé">Matériel autorisé</option>
-                        <option value="Autre catégorie autorisée">Autre catégorie autorisée</option>
+                        <option value="administrative-documents">Documents administratifs</option>
+                        <option value="correspondence">Correspondance</option>
+                        <option value="document-file">Dossier documentaire</option>
+                        <option value="authorized-equipment">Matériel autorisé</option>
+                        <option value="other-authorized-category">Autre catégorie autorisée</option>
                       </select>
                       <span class="field-error" id="content-nature-error" hidden></span>
                     </div>
@@ -303,9 +309,9 @@
                       <label for="access-level">Niveau d’accès <span class="required-mark" aria-hidden="true">*</span></label>
                       <select id="access-level" name="accessLevel" aria-required="true" aria-describedby="access-level-hint access-level-error">
                         <option value="">Choisir un niveau</option>
-                        <option value="Diffusion interne">Diffusion interne</option>
-                        <option value="Diffusion restreinte">Diffusion restreinte</option>
-                        <option value="Diffusion limitée aux référents">Diffusion limitée aux référents</option>
+                        <option value="internal-circulation">Diffusion interne</option>
+                        <option value="restricted-circulation">Diffusion restreinte</option>
+                        <option value="designated-contacts-only">Diffusion limitée aux référents</option>
                       </select>
                       <span class="field-error" id="access-level-error" hidden></span>
                     </div>
@@ -344,10 +350,10 @@
                       <label for="transport-mode">Mode d’acheminement <span class="required-mark" aria-hidden="true">*</span></label>
                       <select id="transport-mode" name="transportMode" aria-required="true" aria-describedby="transport-mode-error">
                         <option value="">Choisir un mode</option>
-                        <option value="Liaison interne autorisée">Liaison interne autorisée</option>
-                        <option value="Transporteur mandaté">Transporteur mandaté</option>
-                        <option value="Remise directe au contact autorisé">Remise directe au contact autorisé</option>
-                        <option value="Autre mode autorisé">Autre mode autorisé</option>
+                        <option value="authorized-internal-dispatch">Liaison interne autorisée</option>
+                        <option value="appointed-carrier">Transporteur mandaté</option>
+                        <option value="direct-authorized-handover">Remise directe au contact autorisé</option>
+                        <option value="other-authorized-method">Autre mode autorisé</option>
                       </select>
                       <span class="field-error" id="transport-mode-error" hidden></span>
                     </div>
@@ -360,9 +366,9 @@
                       <label for="pickup-window">Créneau d’enlèvement <span class="required-mark" aria-hidden="true">*</span></label>
                       <select id="pickup-window" name="pickupWindow" aria-required="true" aria-describedby="pickup-window-error">
                         <option value="">Choisir un créneau</option>
-                        <option value="Matin (08 h – 12 h)">Matin (08 h – 12 h)</option>
-                        <option value="Après-midi (13 h – 17 h)">Après-midi (13 h – 17 h)</option>
-                        <option value="À convenir avec le référent">À convenir avec le référent</option>
+                        <option value="morning">Matin (08 h – 12 h)</option>
+                        <option value="afternoon">Après-midi (13 h – 17 h)</option>
+                        <option value="to-be-agreed">À convenir avec le référent</option>
                       </select>
                       <span class="field-error" id="pickup-window-error" hidden></span>
                     </div>

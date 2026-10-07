@@ -1,6 +1,6 @@
 # Bordereau de transfert de pli — maquette
 
-Prototype front-end en français pour préparer un bordereau de transfert de pli. Le parcours comporte six étapes :
+Prototype front-end pour préparer un bordereau de transfert de pli. L’interface est en français par défaut, avec bascule vers l’anglais ou l’allemand dans l’en-tête ; il s’agit du même formulaire et les réponses déjà saisies sont conservées lors du changement de langue. Les libellés, aides, validations, récapitulatif et PDF suivent la langue choisie. Le parcours comporte six étapes :
 
 1. Expéditeur — mission, service, référent et coordonnées professionnelles.
 2. Destinataire — mission, contact autorisé et confirmation d’autorisation.

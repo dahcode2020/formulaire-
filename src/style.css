@@ -451,3 +451,25 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .review-grid__wide { grid-column: 1 / -1; }
   .signature-choice { display: grid; gap: 7px; }
 }
+
+.language-switch { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 2px; padding: 3px; border: 1px solid #e1e5dd; border-radius: 5px; background: #f5f6f1; }
+.language-switch button { min-width: 31px; min-height: 29px; padding: 0 7px; border: 0; border-radius: 3px; background: transparent; color: #7a867c; font-size: 9px; font-weight: 800; letter-spacing: .04em; cursor: pointer; transition: background 160ms ease, color 160ms ease; }
+.language-switch button:hover { color: var(--green); }
+.language-switch button[aria-pressed="true"] { background: var(--green); color: #fff; box-shadow: 0 2px 5px rgba(31, 61, 52, .12); }
+.language-switch button:focus-visible { outline-offset: 1px; }
+@media (max-width: 700px) {
+  .header-inner { gap: 9px; }
+  .header-cta { display: none; }
+  .language-switch { margin-left: auto; }
+}
+@media (max-width: 360px) {
+  .language-switch button { min-width: 28px; padding-inline: 5px; }
+}
+
+@media (min-width: 701px) and (max-width: 900px) {
+  .header-inner { gap: 12px; }
+  .brand { min-width: 170px; }
+  .main-nav { gap: 16px; margin-right: 5px; }
+  .header-cta { gap: 8px; padding-inline: 13px; }
+  .language-switch button { min-width: 28px; padding-inline: 5px; }
+}

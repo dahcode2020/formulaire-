@@ -1,4 +1,5 @@
 import { jsPDF } from "jspdf";
+import { translate } from "./translations.js";
 import "./style.css";
 
 const form = document.querySelector("#delivery-form");
@@ -25,14 +26,83 @@ const fieldIds = [
 const maskIds = ["mask-missions", "mask-contacts", "mask-content", "mask-transport", "mask-code"];
 
 let currentStep = 0;
+let currentLanguage = "fr";
 let isDrawingSignature = false;
 let hasSignature = false;
 
+const textNodes = [];
+const textWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+  acceptNode(node) {
+    const parent = node.parentElement;
+    if (!parent || parent.closest("script, style, svg, .field-error, .download-status, .step-counter, .review-grid dd")) {
+      return NodeFilter.FILTER_REJECT;
+    }
+    return node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+  },
+});
+while (textWalker.nextNode()) {
+  const node = textWalker.currentNode;
+  const raw = node.nodeValue;
+  const source = raw.trim();
+  const leading = raw.match(/^\s*/)?.[0] ?? "";
+  const trailing = raw.match(/\s*$/)?.[0] ?? "";
+  textNodes.push({ node, source, leading, trailing });
+}
+
+const ariaLabels = [...document.querySelectorAll("[aria-label]")].map((element) => ({
+  element,
+  source: element.getAttribute("aria-label"),
+}));
+const placeholders = [...document.querySelectorAll("[placeholder]")].map((element) => ({
+  element,
+  source: element.getAttribute("placeholder"),
+}));
+const originalTitle = document.title;
+const descriptionMeta = document.querySelector('meta[name="description"]');
+const originalDescription = descriptionMeta?.content ?? "";
+const languageLocale = { fr: "fr-FR", de: "de-DE", en: "en-GB" };
+const t = (source, variables = {}) => translate(source, currentLanguage, variables);
+
 const getValue = (id) => document.getElementById(id).value.trim();
+const getSelectedLabel = (id) => document.getElementById(id).selectedOptions[0]?.textContent.trim() ?? "";
 const isChecked = (id) => document.getElementById(id).checked;
 const setText = (id, value) => {
-  document.getElementById(id).textContent = value || "Non renseigné";
+  document.getElementById(id).textContent = value || t("Non renseigné");
 };
+
+function clearValidationMessages() {
+  document.querySelectorAll(".field-error").forEach((error) => {
+    error.textContent = "";
+    error.hidden = true;
+  });
+  form.querySelectorAll('[aria-invalid="true"]').forEach((field) => field.removeAttribute("aria-invalid"));
+  downloadStatus.textContent = "";
+  downloadStatus.classList.remove("is-error");
+}
+
+function applyLanguage(language) {
+  currentLanguage = language;
+  document.documentElement.lang = language;
+  document.title = t(originalTitle);
+  if (descriptionMeta) descriptionMeta.content = t(originalDescription);
+
+  textNodes.forEach(({ node, source, leading, trailing }) => {
+    if (node.isConnected) node.nodeValue = `${leading}${t(source)}${trailing}`;
+  });
+  ariaLabels.forEach(({ element, source }) => element.setAttribute("aria-label", t(source)));
+  placeholders.forEach(({ element, source }) => element.setAttribute("placeholder", t(source)));
+
+  document.querySelectorAll("[data-language]").forEach((button) => {
+    const selected = button.dataset.language === language;
+    button.setAttribute("aria-pressed", String(selected));
+  });
+  const visibleStep = currentStep + 1;
+  stepCounter.innerHTML = `${t("ÉTAPE")} 0${visibleStep} <span>/ 0${totalSteps}</span>`;
+  progressBar.setAttribute("aria-valuetext", t("Étape {current} sur {total}", { current: visibleStep, total: totalSteps }));
+  clearValidationMessages();
+  if (currentStep === 5) populateReview();
+}
+
 
 function showFieldError(id, message) {
   const input = document.getElementById(id);
@@ -92,10 +162,10 @@ function activateStep(step, { scroll = false } = {}) {
   });
 
   const visibleStep = step + 1;
-  stepCounter.innerHTML = `ÉTAPE 0${visibleStep} <span>/ 0${totalSteps}</span>`;
+  stepCounter.innerHTML = `${t("ÉTAPE")} 0${visibleStep} <span>/ 0${totalSteps}</span>`;
   progressFill.style.width = `${(visibleStep / totalSteps) * 100}%`;
   progressBar.setAttribute("aria-valuenow", String(visibleStep));
-  progressBar.setAttribute("aria-valuetext", `Étape ${visibleStep} sur ${totalSteps}`);
+  progressBar.setAttribute("aria-valuetext", t("Étape {current} sur {total}", { current: visibleStep, total: totalSteps }));
   downloadStatus.textContent = "";
   downloadStatus.classList.remove("is-error");
 
@@ -107,7 +177,7 @@ function activateStep(step, { scroll = false } = {}) {
 function validateRequired(id, message) {
   clearFieldError(id);
   if (getValue(id)) return { valid: true, firstInvalid: null };
-  showFieldError(id, message);
+  showFieldError(id, t(message));
   return { valid: false, firstInvalid: document.getElementById(id) };
 }
 
@@ -125,7 +195,7 @@ function validateContactGroup(prefix) {
   clearFieldError(emailId);
 
   if (!phone && !email) {
-    groupError.textContent = "Renseignez un téléphone ou une adresse courriel professionnelle.";
+    groupError.textContent = t("Renseignez un téléphone ou une adresse courriel professionnelle.");
     groupError.hidden = false;
     document.getElementById(phoneId).setAttribute("aria-invalid", "true");
     document.getElementById(emailId).setAttribute("aria-invalid", "true");
@@ -133,13 +203,13 @@ function validateContactGroup(prefix) {
     valid = false;
   } else {
     if (phone && phone.replace(/\D/g, "").length < 7) {
-      showFieldError(phoneId, "Vérifiez le numéro : indiquez au moins 7 chiffres.");
+      showFieldError(phoneId, t("Vérifiez le numéro : indiquez au moins 7 chiffres."));
       firstInvalid ??= document.getElementById(phoneId);
       valid = false;
     }
     const emailInput = document.getElementById(emailId);
     if (email && !emailInput.validity.valid) {
-      showFieldError(emailId, "Vérifiez le format de l’adresse courriel.");
+      showFieldError(emailId, t("Vérifiez le format de l’adresse courriel."));
       firstInvalid ??= emailInput;
       valid = false;
     }
@@ -156,7 +226,7 @@ function validateCheckbox(id, errorId, message) {
   error.hidden = true;
   if (checkbox.checked) return { valid: true, firstInvalid: null };
   checkbox.setAttribute("aria-invalid", "true");
-  error.textContent = message;
+  error.textContent = t(message);
   error.hidden = false;
   return { valid: false, firstInvalid: checkbox };
 }
@@ -192,13 +262,13 @@ function validateStep(step) {
     const pieces = document.getElementById("piece-count");
     clearFieldError("piece-count");
     if (!pieces.value || !Number.isInteger(Number(pieces.value)) || Number(pieces.value) < 1 || Number(pieces.value) > 999) {
-      showFieldError("piece-count", "Indiquez un nombre entier compris entre 1 et 999.");
+      showFieldError("piece-count", t("Indiquez un nombre entier compris entre 1 et 999."));
       apply({ valid: false, firstInvalid: pieces });
     }
     const weight = document.getElementById("estimated-weight");
     clearFieldError("estimated-weight");
     if (weight.value && (!Number.isFinite(Number(weight.value)) || Number(weight.value) <= 0 || Number(weight.value) > 50000)) {
-      showFieldError("estimated-weight", "Indiquez un poids positif inférieur ou égal à 50 000 kg.");
+      showFieldError("estimated-weight", t("Indiquez un poids positif inférieur ou égal à 50 000 kg."));
       apply({ valid: false, firstInvalid: weight });
     }
   }
@@ -213,7 +283,7 @@ function validateStep(step) {
     const pickupDate = document.getElementById("pickup-date");
     clearFieldError("pickup-date");
     if (pickupDate.value && pickupDate.value < localDateString()) {
-      showFieldError("pickup-date", "La date d’enlèvement ne peut pas être passée.");
+      showFieldError("pickup-date", t("La date d’enlèvement ne peut pas être passée."));
       apply({ valid: false, firstInvalid: pickupDate });
     }
   }
@@ -226,7 +296,7 @@ function validateStep(step) {
     signatureError.hidden = true;
     signatureError.textContent = "";
     if (mode === "draw" && !hasSignature) {
-      signatureError.textContent = "Dessinez votre signature ou choisissez la signature après impression.";
+      signatureError.textContent = t("Dessinez votre signature ou choisissez la signature après impression.");
       signatureError.hidden = false;
       apply({ valid: false, firstInvalid: document.querySelector('input[name="signature-mode"][value="draw"]') });
     }
@@ -240,18 +310,15 @@ function validateStep(step) {
   return valid;
 }
 
-function formatContact(name, role, phone, email) {
-  return [
-    [name, role].filter(Boolean).join(" — "),
-    phone ? `Tél. ${phone}` : "",
-    email,
-  ].filter(Boolean).join(" · ");
+function formatDate(value) {
+  if (!value) return t("Non renseignée");
+  const date = new Date(`${value}T00:00:00`);
+  return new Intl.DateTimeFormat(languageLocale[currentLanguage], { dateStyle: "long" }).format(date);
 }
 
-function formatDate(value) {
-  if (!value) return "Non renseignée";
-  const date = new Date(`${value}T00:00:00`);
-  return new Intl.DateTimeFormat("fr-FR", { dateStyle: "long" }).format(date);
+function formatWeight(value) {
+  if (!value) return t("Non indiqué");
+  return `${new Intl.NumberFormat(languageLocale[currentLanguage], { maximumFractionDigits: 2 }).format(Number(value))} kg`;
 }
 
 function selectedMasks() {
@@ -266,17 +333,15 @@ function selectedMasks() {
 
 function maskLabels(masks) {
   const labels = [];
-  if (masks.missions) labels.push("Missions et services");
-  if (masks.contacts) labels.push("Référents et coordonnées");
-  if (masks.content) labels.push("Contenu, pièces et poids");
-  if (masks.transport) labels.push("Transport et enlèvement");
-  if (masks.code) labels.push("Code de classification");
+  if (masks.missions) labels.push(t("Missions et services"));
+  if (masks.contacts) labels.push(t("Référents et coordonnées"));
+  if (masks.content) labels.push(t("Contenu, pièces et poids"));
+  if (masks.transport) labels.push(t("Transport et enlèvement"));
+  if (masks.code) labels.push(t("Code de classification"));
   return labels;
 }
 
 function populateReview() {
-  const senderContact = formatContact(getValue("sender-name"), getValue("sender-role"), getValue("sender-phone"), getValue("sender-email"));
-  const recipientContact = formatContact(getValue("recipient-name"), getValue("recipient-role"), getValue("recipient-phone"), getValue("recipient-email"));
   const weight = getValue("estimated-weight");
   const masks = selectedMasks();
 
@@ -289,21 +354,22 @@ function populateReview() {
   setText("review-recipient-service", getValue("recipient-service"));
   setText("review-recipient-person", [getValue("recipient-name"), getValue("recipient-role")].filter(Boolean).join(" — "));
   setText("review-recipient-contact", [getValue("recipient-phone"), getValue("recipient-email")].filter(Boolean).join(" · "));
-  setText("review-authorized", isChecked("recipient-authorized") ? "Contact autorisé confirmé" : "À confirmer");
+  setText("review-authorized", isChecked("recipient-authorized") ? t("Contact autorisé confirmé") : t("À confirmer"));
 
-  setText("review-content-nature", getValue("content-nature"));
-  setText("review-piece-count", getValue("piece-count") ? `${getValue("piece-count")} pièce(s)` : "");
-  setText("review-weight", weight ? `${weight.replace(".", ",")} kg` : "Non indiqué");
-  setText("review-content-note", getValue("content-note") || "Aucune précision");
+  setText("review-content-nature", getSelectedLabel("content-nature"));
+  const pieceCount = Number(getValue("piece-count"));
+  setText("review-piece-count", pieceCount ? `${pieceCount} ${t(pieceCount === 1 ? "pièce" : "pièces")}` : "");
+  setText("review-weight", weight ? formatWeight(weight) : t("Non indiqué"));
+  setText("review-content-note", getValue("content-note") || t("Aucune précision"));
 
-  setText("review-access-level", getValue("access-level"));
-  setText("review-classification-code", getValue("classification-code") || "Non renseigné");
-  setText("review-mask-summary", maskLabels(masks).join(" · ") || "Aucun masquage sélectionné");
+  setText("review-access-level", getSelectedLabel("access-level"));
+  setText("review-classification-code", getValue("classification-code") || t("Non renseigné"));
+  setText("review-mask-summary", maskLabels(masks).join(" · ") || t("Aucun masquage sélectionné"));
 
-  setText("review-transport-mode", getValue("transport-mode"));
+  setText("review-transport-mode", getSelectedLabel("transport-mode"));
   setText("review-pickup-date", formatDate(getValue("pickup-date")));
-  setText("review-pickup-window", getValue("pickup-window"));
-  setText("review-transport-note", getValue("transport-note") || "Aucune note");
+  setText("review-pickup-window", getSelectedLabel("pickup-window"));
+  setText("review-transport-note", getValue("transport-note") || t("Aucune note"));
 }
 
 function collectData() {
@@ -326,20 +392,20 @@ function collectData() {
       authorized: isChecked("recipient-authorized"),
     },
     content: {
-      nature: getValue("content-nature"),
+      nature: getSelectedLabel("content-nature"),
       pieces: getValue("piece-count"),
       weight: getValue("estimated-weight"),
       note: getValue("content-note"),
     },
     confidentiality: {
-      level: getValue("access-level"),
+      level: getSelectedLabel("access-level"),
       code: getValue("classification-code"),
       masks: selectedMasks(),
     },
     transport: {
-      mode: getValue("transport-mode"),
+      mode: getSelectedLabel("transport-mode"),
       date: getValue("pickup-date"),
-      window: getValue("pickup-window"),
+      window: getSelectedLabel("pickup-window"),
       note: getValue("transport-note"),
     },
     signatory: {
@@ -372,31 +438,31 @@ function makePdf() {
   const green = [38, 77, 64];
   const ink = [43, 61, 51];
   const muted = [112, 124, 114];
-  const masked = "MASQUÉ — règle de diffusion";
+  const masked = t("Masqué — règle de diffusion");
   let y = 0;
 
-  const maskValue = (value, maskedCategory) => (masks[maskedCategory] ? masked : value || "Non renseigné");
-  const safe = (value) => cleanPdfText(value || "Non renseigné");
+  const maskValue = (value, maskedCategory) => (masks[maskedCategory] ? masked : value || t("Non renseigné"));
+  const safe = (value) => cleanPdfText(value || t("Non renseigné"));
 
-  doc.setProperties({ title: "Bordereau de transfert - maquette", subject: "Récapitulatif A4 de démonstration" });
+  doc.setProperties({ title: t("Bordereau de transfert de pli — Maquette"), subject: t("Récapitulatif de validation et d'acheminement") });
   doc.setFillColor(...green);
   doc.rect(0, 0, pageWidth, 4, "F");
   doc.setFont("helvetica", "bold");
   doc.setFontSize(8);
   doc.setTextColor(...green);
-  doc.text("BORDEREAU DE TRANSFERT", margin, 15);
+  doc.text(t("BORDEREAU DE TRANSFERT"), margin, 15);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(150, 91, 65);
-  doc.text("MAQUETTE - NON OFFICIEL", pageWidth - margin, 15, { align: "right" });
+  doc.text(t("MAQUETTE - NON OFFICIEL"), pageWidth - margin, 15, { align: "right" });
   doc.setFont("helvetica", "normal");
   doc.setFontSize(20);
   doc.setTextColor(...ink);
-  doc.text("Transfert de pli", margin, 28);
+  doc.text(t("Transfert de pli"), margin, 28);
   doc.setFontSize(9);
   doc.setTextColor(...muted);
-  doc.text("Récapitulatif de validation et d'acheminement", margin, 35);
+  doc.text(t("Récapitulatif de validation et d'acheminement"), margin, 35);
   doc.setFontSize(8);
-  doc.text(`Généré le ${new Intl.DateTimeFormat("fr-FR", { dateStyle: "long" }).format(new Date())}`, pageWidth - margin, 35, { align: "right" });
+  doc.text(t("Généré le {date}", { date: new Intl.DateTimeFormat(languageLocale[currentLanguage], { dateStyle: "long" }).format(new Date()) }), pageWidth - margin, 35, { align: "right" });
 
   doc.setFillColor(243, 245, 239);
   doc.setDrawColor(230, 234, 226);
@@ -404,7 +470,7 @@ function makePdf() {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(8);
   doc.setTextColor(...green);
-  doc.text("NIVEAU DE DIFFUSION", margin + 5, 49);
+  doc.text(t("NIVEAU DE DIFFUSION"), margin + 5, 49);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
   doc.setTextColor(...ink);
@@ -446,41 +512,41 @@ function makePdf() {
     y += lines.length * 4.8 + 4.2;
   };
 
-  addSection("01 · Expéditeur");
-  addField("Mission", maskValue(data.sender.mission, "missions"));
-  addField("Service", maskValue(data.sender.service, "missions"));
-  addField("Référent responsable", maskValue(`${data.sender.name} — ${data.sender.role}`, "contacts"));
-  addField("Téléphone", maskValue(data.sender.phone, "contacts"));
-  addField("Courriel professionnel", maskValue(data.sender.email, "contacts"));
+  addSection(t("01 · Expéditeur"));
+  addField(t("Mission"), maskValue(data.sender.mission, "missions"));
+  addField(t("Service"), maskValue(data.sender.service, "missions"));
+  addField(t("Référent responsable"), maskValue(`${data.sender.name} — ${data.sender.role}`, "contacts"));
+  addField(t("Téléphone"), maskValue(data.sender.phone, "contacts"));
+  addField(t("Courriel professionnel"), maskValue(data.sender.email, "contacts"));
 
-  addSection("02 · Destinataire");
-  addField("Mission de destination", maskValue(data.recipient.mission, "missions"));
-  if (data.recipient.service) addField("Service destinataire", maskValue(data.recipient.service, "missions"));
-  addField("Contact autorisé", maskValue(`${data.recipient.name} — ${data.recipient.role}`, "contacts"));
-  addField("Téléphone", maskValue(data.recipient.phone, "contacts"));
-  addField("Courriel professionnel", maskValue(data.recipient.email, "contacts"));
-  addField("Autorisation de réception", data.recipient.authorized ? "Confirmée par le déclarant" : "Non confirmée");
+  addSection(t("02 · Destinataire"));
+  addField(t("Mission de destination"), maskValue(data.recipient.mission, "missions"));
+  if (data.recipient.service) addField(t("Service destinataire"), maskValue(data.recipient.service, "missions"));
+  addField(t("Contact autorisé"), maskValue(`${data.recipient.name} — ${data.recipient.role}`, "contacts"));
+  addField(t("Téléphone"), maskValue(data.recipient.phone, "contacts"));
+  addField(t("Courriel professionnel"), maskValue(data.recipient.email, "contacts"));
+  addField(t("Autorisation de réception"), data.recipient.authorized ? t("Confirmée par le déclarant") : t("Non confirmée"));
 
-  addSection("03 · Contenu général");
-  addField("Nature du pli", maskValue(data.content.nature, "content"));
-  addField("Nombre de pièces", maskValue(data.content.pieces, "content"));
-  addField("Poids estimé", maskValue(data.content.weight ? `${data.content.weight.replace(".", ",")} kg` : "Non indiqué", "content"));
-  if (data.content.note) addField("Précision non sensible", maskValue(data.content.note, "content"));
+  addSection(t("03 · Contenu général"));
+  addField(t("Nature du pli"), maskValue(data.content.nature, "content"));
+  addField(t("Nombre de pièces"), maskValue(data.content.pieces, "content"));
+  addField(t("Poids estimé"), maskValue(data.content.weight ? formatWeight(data.content.weight) : t("Non indiqué"), "content"));
+  if (data.content.note) addField(t("Précision non sensible"), maskValue(data.content.note, "content"));
 
-  addSection("04 · Confidentialité");
-  addField("Niveau d'accès choisi", data.confidentiality.level);
-  if (data.confidentiality.code) addField("Code de classification non secret", maskValue(data.confidentiality.code, "code"));
-  addField("Règles de masquage appliquées", maskLabels(masks).join(", ") || "Aucun masquage sélectionné");
+  addSection(t("04 · Confidentialité"));
+  addField(t("Niveau d'accès choisi"), data.confidentiality.level);
+  if (data.confidentiality.code) addField(t("Code de classification non secret"), maskValue(data.confidentiality.code, "code"));
+  addField(t("Règles de masquage appliquées"), maskLabels(masks).join(", ") || t("Aucun masquage sélectionné"));
 
-  addSection("05 · Transport et enlèvement");
-  addField("Mode d'acheminement", maskValue(data.transport.mode, "transport"));
-  if (data.transport.date) addField("Date prévue", maskValue(formatDate(data.transport.date), "transport"));
-  addField("Créneau", maskValue(data.transport.window, "transport"));
-  if (data.transport.note) addField("Note logistique non sensible", maskValue(data.transport.note, "transport"));
+  addSection(t("05 · Transport et enlèvement"));
+  addField(t("Mode d'acheminement"), maskValue(data.transport.mode, "transport"));
+  if (data.transport.date) addField(t("Date prévue"), maskValue(formatDate(data.transport.date), "transport"));
+  addField(t("Créneau"), maskValue(data.transport.window, "transport"));
+  if (data.transport.note) addField(t("Note logistique non sensible"), maskValue(data.transport.note, "transport"));
 
-  addSection("06 · Validation et signature");
-  addField("Signataire déclaré", `${data.signatory.name} — ${data.signatory.role}`);
-  addField("Mode de signature", data.signatory.mode === "draw" ? "Signature dessinée dans le navigateur (non certifiée)" : "Signature manuscrite à apposer après impression");
+  addSection(t("06 · Validation et signature"));
+  addField(t("Signataire déclaré"), `${data.signatory.name} — ${data.signatory.role}`);
+  addField(t("Mode de signature"), data.signatory.mode === "draw" ? t("Signature dessinée dans le navigateur (non certifiée)") : t("Signature manuscrite à apposer après impression"));
   ensureSpace(35);
   const signatureBoxY = y;
   doc.setDrawColor(207, 216, 204);
@@ -491,18 +557,18 @@ function makePdf() {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7);
     doc.setTextColor(...muted);
-    doc.text("Signature dessinée - non certifiée", margin + 89, signatureBoxY + 12);
+    doc.text(t("Signature dessinée - non certifiée"), margin + 89, signatureBoxY + 12);
   } else {
     doc.setDrawColor(115, 128, 115);
     doc.line(margin + 6, signatureBoxY + 19, margin + 95, signatureBoxY + 19);
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7);
     doc.setTextColor(...muted);
-    doc.text("Signature manuscrite après impression", margin + 6, signatureBoxY + 24);
+    doc.text(t("Signature manuscrite après impression"), margin + 6, signatureBoxY + 24);
   }
   y += 34;
 
-  const notice = "MAQUETTE DE DEMONSTRATION - Document genere sur cet appareil, sans transmission. N'est pas un bordereau officiel, une habilitation ou une signature electronique certifiee. Les niveaux et codes de classification saisis ici ne sont que des reperes de maquette. Ne pas utiliser pour des informations classifiees ou des secrets.";
+  const notice = t("MAQUETTE DE DEMONSTRATION - Document genere sur cet appareil, sans transmission. N'est pas un bordereau officiel, une habilitation ou une signature electronique certifiee. Les niveaux et codes de classification saisis ici ne sont que des reperes de maquette. Ne pas utiliser pour des informations classifiees ou des secrets.");
   const noticeLines = doc.splitTextToSize(cleanPdfText(notice), contentWidth - 10);
   const noticeHeight = noticeLines.length * 4 + 9;
   ensureSpace(noticeHeight + 2);
@@ -522,7 +588,7 @@ function makePdf() {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7);
     doc.setTextColor(...muted);
-    doc.text("Maquette locale - vérifier les règles de diffusion avant toute utilisation", margin, pageHeight - 8);
+    doc.text(t("Maquette locale - vérifier les règles de diffusion avant toute utilisation"), margin, pageHeight - 8);
     doc.text(`${page} / ${totalPages}`, pageWidth - margin, pageHeight - 8, { align: "right" });
   }
 
@@ -658,17 +724,22 @@ document.getElementById("clear-signature").addEventListener("click", () => {
 
 setupSignaturePad();
 
+document.querySelectorAll("[data-language]").forEach((button) => {
+  button.addEventListener("click", () => applyLanguage(button.dataset.language));
+});
+
 document.getElementById("download-pdf").addEventListener("click", () => {
   if (!validateStep(5)) return;
   downloadStatus.classList.remove("is-error");
   try {
     makePdf();
-    downloadStatus.textContent = "Le bordereau A4 a été généré sur cet appareil. Les masquages sélectionnés sont appliqués à l’export.";
+    downloadStatus.textContent = t("Le bordereau A4 a été généré sur cet appareil. Les masquages sélectionnés sont appliqués à l’export.");
   } catch (error) {
     console.error("Impossible de générer le PDF :", error);
     downloadStatus.classList.add("is-error");
-    downloadStatus.textContent = "L’export PDF a échoué. Réessayez ou vérifiez les paramètres de votre navigateur.";
+    downloadStatus.textContent = t("L’export PDF a échoué. Réessayez ou vérifiez les paramètres de votre navigateur.");
   }
 });
 
 document.getElementById("current-year").textContent = String(new Date().getFullYear());
+applyLanguage("fr");
